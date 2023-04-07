@@ -10,11 +10,11 @@ app.get("/", (req, res) => res.type('html').send(html));
 
 app.post("/signal", (req, res) => {
   fetch('https://backend.magmanode.com/api/client/servers/963fe62a/power', {
-      method: 'POST',
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + ${process.env.apiKey},
+    method: 'POST',
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + ${process.env.apiKey},
     },
     body: JSON.stringify(req.body)
   })
