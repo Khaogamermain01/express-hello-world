@@ -14,7 +14,7 @@ app.post("/signal", (req, res) => {
     headers: {
       "Accept": "application/json",
       "Content-Type": "application/json",
-      "Authorization": "Bearer " + ${process.env.apiKey},
+      "Authorization": "Bearer " + process.env.apiKey,
     },
     body: JSON.stringify(req.body)
   })
