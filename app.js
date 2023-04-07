@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 app.get("/", (req, res) => res.type('html').send(html));
 
-app.post("/signal", (req, res) => {
+app.post("/power/:signal", (req, res) => {
   fetch('https://backend.magmanode.com/api/client/servers/963fe62a/power', {
     method: 'POST',
     headers: {
@@ -16,7 +16,7 @@ app.post("/signal", (req, res) => {
       "Content-Type": "application/json",
       "Authorization": "Bearer " + process.env.apiKey,
     },
-    body: JSON.stringify(req.body)
+    body: JSON.stringify({ signal: req.params.signal })
   })
 })
 
@@ -39,27 +39,8 @@ const html = `
 
     <script>
       function sendAPIPower(signal) {
-        fetch('https://backend.magmanode.com/api/client/servers/963fe62a/power', {
+        fetch('/power/' + signal, {
           method: 'POST',
-          headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + ${process.env.apiKey},
-          },
-          body: JSON.stringify({
-            signal
-          })
-        })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          // Handle the response from the server here
-          console.log('API request successful');
-        })
-        .catch(error => {
-          // Handle any errors that occur during the request here
-          console.error('API request failed:', error);
         });
       }
     </script>
